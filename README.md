@@ -4,19 +4,10 @@
 
 This project implements a Retrieval-Augmented Generation (RAG) system that processes articles and images from "The Batch" newsletter by DeepLearning.AI. It combines web scraping, document processing, and image analysis to create a searchable knowledge base with both text and image content.
 
-## Features
-
-1. Web scraping of articles from deeplearning.ai
-2. Image extraction and captioning using AI models
-3. Document vectorization and semantic search
-4. Combined text and image querying capabilities
-5. Streamlit-based user interface
-6. Comprehensive evaluation system with multiple metrics
-
 ## Project Structure
 
 ```plaintext
-RAG_APP/
+the-batch-rag-app/
 ├── evaluation/                            # Evaluation modules
 │   ├── build_dataset.py                   # Dataset management
 │   ├── correctness.py                     # Correctness evaluation
@@ -64,7 +55,7 @@ RAG_APP/
 
 2. **Clone the Repository**
    ```bash
-   git clone [<repository-url>](https://github.com/Penteusz/the-batch-rag-app.git)
+   git clone https://github.com/Penteusz/the-batch-rag-app.git
    cd the-batch-rag-app
    ```
 
@@ -85,7 +76,7 @@ RAG_APP/
    ```
 
 5. **Configure Environment Variables**
-   Create a `.env` file in the root directory:
+   Create `.env` file in the the-batch-rag-app directory:
    ```plaintext
    # Required
    OPENAI_API_KEY="your_openai_api_key_here"             # OpenAI API key for embeddings and chat
@@ -104,8 +95,7 @@ The `config.py` file contains important settings that control the behavior of th
 
 1. **Data Processing Limits**
    - `TEST_RUN`: When True, runs the application in test mode with limited data (default: True)
-   - `LOADED_ARTICLES_LIMIT`: Maximum number of articles to process when TEST_RUN is True (None for all, default: 100)
-   - `LOADED_IMAGES_LIMIT`: Maximum number of images to process when TEST_RUN is True (None for all, default: 50)
+   - `LOADED_ARTICLES_LIMIT`: Maximum number of articles to process when TEST_RUN is True (None for all, default: 50)
    - `BATCH_SIZE`: Number of items to process in each batch (default: 50)
    - `BATCH_LIMIT`: Maximum number of batches to process when TEST_RUN is True (None for all)
 

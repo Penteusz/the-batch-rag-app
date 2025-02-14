@@ -11,8 +11,7 @@ if not OPENAI_API_KEY:
 
 # Test mode settings
 TEST_RUN = True
-LOADED_ARTICLES_LIMIT = 10  # Maximum articles to process in test mode
-LOADED_IMAGES_LIMIT = 5     # Maximum images to process in test mode
+LOADED_ARTICLES_LIMIT = 50  # Maximum articles to process in test mode
 BATCH_SIZE = 50             # Number of items per batch
 BATCH_LIMIT = None         # Maximum number of batches to process in test mode
 

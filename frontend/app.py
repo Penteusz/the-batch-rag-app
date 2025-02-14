@@ -9,7 +9,6 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from PIL import Image
-from langchain.chains import LLMChain
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import FAISS
@@ -17,6 +16,7 @@ from typing import List, Tuple
 import streamlit as st
 from config import OPENAI_MODEL_NAME, MODEL_TEMPERATURE, VECTORSTORE_PATH, OPENAI_API_KEY, PROMPT_TEMPLATE, TOKEN_LIMIT, RETRIEVED_DOCS_COUNT
 from langsmith import traceable
+from langchain_core.runnables import RunnablePassthrough, RunnableSequence
 
 
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
@@ -31,6 +31,9 @@ prompt = PromptTemplate(
     input_variables=["context", "query"],
     template=PROMPT_TEMPLATE,
 )
+
+# Create the runnable chain
+chain = prompt | llm
 
 
 @st.cache_resource(show_spinner=False)
@@ -52,7 +55,8 @@ def retrieve_documents(query: str, k: int = 5):
     if vectorstore is None:
         return []
     retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": k})
-    return retriever.get_relevant_documents(query)
+    # return retriever.get_relevant_documents(query)
+    return retriever.invoke(query)
 
 def count_tokens(text: str) -> int:
     """Counts tokens in a text string using OpenAI's tokenizer."""
@@ -93,9 +97,8 @@ def generate_response(query: str, context: str) -> str:
     Returns:
         Generated response
     """
-    chain = LLMChain(llm=llm, prompt=prompt)
-    response = chain.run(context=context, query=query)
-    return response
+    response = chain.invoke({"context": context, "query": query})
+    return response.content
 
 @traceable(name="process_query")
 def process_query(query: str) -> Tuple[str, List[str]]:

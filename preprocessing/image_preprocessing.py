@@ -7,7 +7,6 @@ from transformers import pipeline, BlipProcessor, BlipForConditionalGeneration
 from tqdm import tqdm
 from langchain.schema import Document
 import torch
-from config import LOADED_IMAGES_LIMIT
 
 
 class ImageCaptioner:

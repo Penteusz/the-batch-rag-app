@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import os
 from urllib.parse import urljoin, urlparse
 from helpers.ingestion import IngestionHelper
+from tqdm import tqdm
 
 
 class ImageScraper(IngestionHelper):
@@ -159,7 +160,7 @@ class ImageScraper(IngestionHelper):
         image_urls = self.get_image_urls(html)
         saved_images = []
         
-        for image_url in image_urls:
+        for image_url in tqdm(image_urls, desc=f"Downloading images from {urlparse(url).netloc + urlparse(url).path}", leave=False):
             image_path = self.save_image(image_url)
             if image_path:
                 saved_images.append(image_path)
@@ -175,7 +176,7 @@ class ImageScraper(IngestionHelper):
             urls = urls[:limit]
             
         all_saved_images = []
-        for url in urls:
+        for url in tqdm(urls, desc="Processing URLs", unit="url"):
             saved_images = self.scrape_images_from_url(url)
             all_saved_images.extend(saved_images)
             

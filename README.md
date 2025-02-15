@@ -4,40 +4,6 @@
 
 This project implements a Retrieval-Augmented Generation (RAG) system that processes articles and images from "The Batch" newsletter by DeepLearning.AI. It combines web scraping, document processing, and image analysis to create a searchable knowledge base with both text and image content.
 
-## Project Structure
-
-```plaintext
-the-batch-rag-app/
-├── evaluation/                            # Evaluation modules
-│   ├── build_dataset.py                   # Dataset management
-│   ├── correctness.py                     # Correctness evaluation
-│   ├── groundedness.py                    # Groundedness evaluation
-│   ├── relevance.py                       # Relevance evaluation
-│   └── retrieval_relevance.py             # Retrieval relevance evaluation
-├── executors/                             # Main execution scripts
-│   ├── execute_rag_preprocessing.py       # Data preprocessing
-│   └── execute_evaluation.py              # System evaluation
-├── frontend/                              # User interface
-│   ├── app.py                             # Frontend app
-│   └── requirements.txt                   # System evaluationFrontend app dependencies
-├── helpers/                               # Utility functions
-│   ├── ingestion.py                       # Common ingestion utilities
-│   ├── logger_config.py                   # Logging configuration
-│   └── vectorstore_manager.py             # Vector store operations
-├── ingestion/                             # Data collection
-│   ├── scrape_images.py                   # Image scraping
-│   └── sitemap_scraper.py                 # Article URL extraction
-├── logs/                                  # Application logs
-├── preprocessing/                         # Data processing
-│   ├── documents_processing.py            # Document vectorization
-│   └── image_preprocess.py                # Image captioning
-├── config.py                              # Configuration settings
-├── requirements.txt                       # Project dependencies
-├── Dockerfile                             # Container configuration
-├── .dockerignore                          # Docker build exclusions
-└── .env                                   # Environment variables
-```
-
 ## Prerequisites
 
 1. Python 3.10 or higher
